@@ -50,6 +50,7 @@
     pulseaudio = {
       enable = true;
       package = pkgs.pulseaudioFull;
+      support32Bit = true;
       extraModules = [ pkgs.pulseaudio-modules-bt ];
     };
   };
@@ -101,13 +102,22 @@
       };
     }; */
   };
-  
+
+  programs = {
+    adb.enable = true;
+    java = {
+      enable = true;
+    };
+  };
+
+  hardware.steam-hardware.enable = true;  
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.inex = {
     isNormalUser = true;
     home = "/home/inex";
     description = "Inex Code";
-    extraGroups = [ "wheel" "networkmanager" "jackaudio" "audio" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "jackaudio" "audio" "video" "adbusers" ]; # Enable ‘sudo’ for the user.
   };
 
   # This value determines the NixOS release with which your system is to be
