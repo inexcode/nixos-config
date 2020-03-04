@@ -16,3 +16,4 @@ Extends default profile with JACK and Ardour
 
 - gnome
 - zsh
+- neovim
