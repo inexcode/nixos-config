@@ -16,6 +16,7 @@ in neovim.override {
          "nerdtree"
          "vim-nix"
          "dart-vim-plugin"
+         "coc-nvim"
        ];
      }
    ];

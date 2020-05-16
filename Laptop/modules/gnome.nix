@@ -6,7 +6,7 @@
     displayManager = {
       gdm = {
         enable = true;
-        wayland = true;
+        wayland = false;
       };
     };
     desktopManager = {
@@ -21,6 +21,7 @@
     gnome3.pomodoro
     gnome3.gnome-tweaks
     gnome3.networkmanager-openvpn
+    gnome3.evolution
     gnomeExtensions.gsconnect
     paper-icon-theme
   ];

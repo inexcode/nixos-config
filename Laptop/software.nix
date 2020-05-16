@@ -11,34 +11,49 @@ in {
     (pkgs.callPackage ./modules/my_vim.nix {})
     neofetch
     pciutils
-    openvpn
+    usbutils
+    bind
+    # openvpn
     git
     unzip
     tldr
     ffmpeg
+    wget
+    nix-bundle
+    nmap
+
+    # Wireguard
+    wireguard
+    wireguard-tools
 
     nextcloud-client
 
     # Encrypted folders
     encfs
-    gencfsm
+    #gencfsm
 
     # Browsers
     firefox
     transmission-gtk
+    youtube-dl
 
     # Messangers
     tdesktop
-    discord
-    riot-desktop
+    #discord
+    mumble
+    #riot-desktop
     qtox
+    dino
+    zoom-us
     
     # Games
     steam
     steam-run-native
     unstable.openttd
+    lutris
     vulkan-tools
-    lutris-unwrapped
+    wineWowPackages.full
+    wineWowPackages.fonts
     
     # Development
     vscode
@@ -47,8 +62,12 @@ in {
     texlive.combined.scheme-full
     gcc-unwrapped
     python3Full
+    # (import (builtins.fetchTarball "https://github.com/babariviere/nixpkgs/archive/flutter-init.tar.gz") {}).flutter
     #android-studio
     cmake
+    nodejs
+
+    ccls
 
     josm
     
@@ -59,21 +78,25 @@ in {
     # Graphics
     krita
     gmic_krita_qt
+    potrace
     
     # Audio
     audacity
-    lmms
+    # lmms
     picard
     cmus
 
     # Plugins
-    ladspaPlugins
-    lsp-plugins
+    # ladspaPlugins
+    # lsp-plugins
     
     # Documents
     anki
     libreoffice
     homebank
+    trilium
+    klavaro
+    liberation_ttf
   ];
 }
 

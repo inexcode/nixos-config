@@ -13,11 +13,15 @@
       ./modules/zsh.nix
     ];
 
-  nixpkgs.config.allowUnfree = true;
+    nixpkgs.config = {
+      allowUnfree = true;
+      android_sdk.accept_license = true;
+    };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.extraModulePackages = [ config.boot.kernelPackages.wireguard ];
 
   # Networking
 
@@ -34,8 +38,8 @@
       };
     };
     firewall = {
-      allowedTCPPorts = [ 1716 ];
-      allowedUDPPorts = [ 1716 ];
+      allowedTCPPorts = [ 1716 51820 24642 ];
+      allowedUDPPorts = [ 1716 51820 24642 ];
     };
   };
   
@@ -74,7 +78,7 @@
   services.xserver = {
     enable = true;
     layout = "us";
-    videoDrivers = [ "intel" "nv" ];
+    videoDrivers = [ "nvidia" ];
     libinput.enable = true;
     exportConfiguration = true;
     wacom.enable = true;
@@ -83,24 +87,24 @@
   };
 
   # Video driver
-  hardware = {
+  hardware = {/*
     bumblebee = {
       enable = true;
       driver = "nouveau";
-    };
+    };*/
     opengl = {
       enable = true;
       driSupport32Bit = true;
-    }; /*
+    };
     nvidia = {
       modesetting.enable = true;
-      optimus_prime = {
-        enable = true;
-        allowExternalGpu = true;
+      prime = {
+        offload.enable = true;
+        # allowExternalGpu = true;
         nvidiaBusId = "PCI:1:0:0";
         intelBusId = "PCI:0:2:0";
       };
-    }; */
+    };
   };
 
   programs = {
@@ -110,6 +114,8 @@
     };
   };
 
+  virtualisation.docker.enable = true;
+
   hardware.steam-hardware.enable = true;  
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -117,7 +123,7 @@
     isNormalUser = true;
     home = "/home/inex";
     description = "Inex Code";
-    extraGroups = [ "wheel" "networkmanager" "jackaudio" "audio" "video" "adbusers" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "jackaudio" "audio" "video" "adbusers" "docker" ]; # Enable ‘sudo’ for the user.
   };
 
   # This value determines the NixOS release with which your system is to be
@@ -128,4 +134,3 @@
 
 
 }
-
