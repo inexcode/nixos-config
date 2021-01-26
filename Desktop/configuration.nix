@@ -24,7 +24,19 @@ in {
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
+    grub.useOSProber = true;
   };
+
+  fileSystems."/mediastorage" = {
+    device = "/dev/disk/by-uuid/aed202ac-7414-40b9-9d71-011b7043c850";
+    fsType = "ext4";
+  };
+
+  fileSystems."/backups" = {
+    device = "/dev/disk/by-uuid/63db910e-f906-4211-bac5-4330777c8283";
+    fsType = "ext4";
+  };
+
 
   networking = {
     hostName = "inex-pc";
@@ -139,7 +151,10 @@ in {
     };
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.inex = {
