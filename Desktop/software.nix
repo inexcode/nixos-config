@@ -1,10 +1,18 @@
 { config, pkgs, ... }:
 
 let
-  unstable = import <nixos-unstable> {};
-in {
+  unstable = import <nixos-unstable> { config.allowUnfree = true; };
+  MyOBS = pkgs.wrapOBS.override { obs-studio = pkgs.obs-studio; } {
+  plugins = with pkgs.obs-studio-plugins; [
+    wlrobs
+    obs-gstreamer
+        obs-multi-rtmp
+  ];
+};
+in
+{
   environment.systemPackages = with pkgs; [
-    # Utils    
+    # Utils
     pciutils
     usbutils
     i2c-tools
@@ -13,13 +21,16 @@ in {
     nix-bundle
     file
     restic
-
+    jq
     # Connectivity
     nmap
     libcec
+    clinfo
+    alfis
 
     # File systems
     gparted
+    btrfs-progs
 
     # Archives
     unzip
@@ -39,6 +50,8 @@ in {
     neofetch
     ponysay
     bpytop
+    httpie
+    htop
 
     # Voice
     speechd
@@ -61,101 +74,121 @@ in {
 
     # Downloaders
     transmission-gtk
-    youtube-dl
     syncthing
     wget
+    yt-dlp
 
     # Messangers
     tdesktop
-    #discord
     mumble
-    #riot-desktop
     qtox
     dino
-    #zoom-us
-    #teams
-    teamspeak_client
-    
+    gomuks
+    deltachat-desktop
+
     # Games
     steam
     steam-run-native
     openttd
     minecraft
     vulkan-tools
-    wineWowPackages.full
-    wineWowPackages.fonts
+    wineWowPackages.stable
     winetricks
+    protontricks
     xonotic
-    
+    cataclysm-dda
+
+    lutris
+    bottles
+
+    # VR
+    monado
+    openhmd
+
     # VCS
     git
     gitAndTools.git-bug
 
     # IDE
-    vscode
-    (pkgs.callPackage ./modules/my_vim.nix {})
+
+    (pkgs.callPackage ./modules/my_vim.nix { })
+    lens
+    postman
+    androidStudioPackages.canary
 
     # Compilers and interpretators
     ccls
     cmake
     gcc-unwrapped
     octaveFull
-    texlive.combined.scheme-full
     python3Full
     nodejs
-    fdroidserver
+    nixpkgs-fmt
+    pandoc
 
     # Docker and orchestration
-    ansible_2_9
+    ansible
     docker-compose
-    
+
+    cookiecutter
+
     # Maps
     josm
-    
+
     # Screen recording
-    unstable.obs-studio
-    unstable.obs-wlrobs
-    unstable.obs-v4l2sink
-    #unstable.obs-linuxbrowser
-    peek
-    
+    obs-studio
+    kooha
+
     # Graphics
     krita
     gmic_krita_qt
     potrace
     ffmpeg
-    
+    blender
+    unstable.shotwell
+    inkscape
+    kdenlive
+
     # Audio
     audacity
     # lmms
     picard
     cmus
     spotify
-    pulseeffects
+    pulseeffects-pw
 
     vlc
     syncplay
+    mpv
 
-    kruler
+    brasero
+    libsForQt5.k3b
 
-    # Plugins
-    # ladspaPlugins
-    # lsp-plugins
-    
+    # DAW
+    zrythm
+    distrho
+    helvum
+    zam-plugins
+    x42-plugins
+    helm
+    zyn-fusion
+    lsp-plugins
+    ardour
     # Documents
     anki
     libreoffice
     homebank
-    trilium-desktop
     klavaro
     liberation_ttf
     keepassxc
     glow
-    
+    unstable.obsidian
+    aegisub
+
     # Themes
     paper-icon-theme
     plata-theme
-    
+
   ];
 
 }

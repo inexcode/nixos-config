@@ -11,21 +11,20 @@
       };
     };
     desktopManager = {
-      gnome3.enable = true;
-      kodi.enable = true;
+      gnome.enable = true;
     };
   };
-  
+
 
   qt5.platformTheme = "gnome";
 
   environment.systemPackages = with pkgs; [
-    gnome3.pomodoro
-    gnome3.gnome-tweaks
-    gnome3.networkmanager-openvpn
-    gnome3.evolution
+    gnome.pomodoro
+    gnome.gnome-tweaks
+    gnome.networkmanager-openvpn
+    rhythmbox
+    evolution
     gnomeExtensions.gsconnect
     paper-icon-theme
   ];
 }
-
