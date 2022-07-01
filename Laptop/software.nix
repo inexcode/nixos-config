@@ -1,29 +1,52 @@
 { config, pkgs, ... }:
 
 let
-  unstable = import <nixos-unstable> {};
-in {
+  unstable = import <nixos-unstable> { config.allowUnfree = true; };
+in
+{
   environment.systemPackages = with pkgs; [
-    # Utils    
-    cool-retro-term
-    tmux
-    ponysay
-    (pkgs.callPackage ./modules/my_vim.nix {})
-    neofetch
+    # Utils
+    (pkgs.callPackage ./modules/my_vim.nix { })
     pciutils
     usbutils
+    i2c-tools
     bind
-    # openvpn
-    git
-    unzip
-    tldr
-    ffmpeg
-    wget
     nix-bundle
+    file
+    glxinfo
+
     nmap
 
+    gparted
+
+    # Archives
+    unzip
+    unrar
+
+    appimage-run
+
+    # Manuals
+    unstable.manix
+    tldr
+
+    # Terminal
+    cool-retro-term
+    mosh
+    tmux
+    neofetch
+    ponysay
+    bpytop
+    httpie
+    htop
+
+    # Voice
+    speechd
+    rhvoice
+    unstable.noisetorch
+
+    xsane
+
     # Wireguard
-    wireguard
     wireguard-tools
 
     nextcloud-client
@@ -34,69 +57,102 @@ in {
 
     # Browsers
     firefox
+    ungoogled-chromium
+
+    # Downloaders
     transmission-gtk
-    youtube-dl
+    yt-dlp
+    syncthing
+    wget
 
     # Messangers
     tdesktop
-    #discord
     mumble
-    #riot-desktop
     qtox
     dino
-    zoom-us
-    
+    gomuks
+
     # Games
     steam
-    steam-run-native
+    steam-run
     unstable.openttd
+    minecraft
     lutris
     vulkan-tools
     wineWowPackages.full
     wineWowPackages.fonts
-    
-    # Development
-    vscode
-    ansible
-    octaveFull
-    texlive.combined.scheme-full
-    gcc-unwrapped
-    python3Full
-    # (import (builtins.fetchTarball "https://github.com/babariviere/nixpkgs/archive/flutter-init.tar.gz") {}).flutter
-    #android-studio
-    cmake
-    nodejs
+    xonotic
+    cataclysm-dda
 
+    # VCS
+    git
+    gitAndTools.git-bug
+
+    # IDE
+    lens
+    postman
+    unstable.androidStudioPackages.canary
+
+    # Compilers and interpretators
     ccls
+    cmake
+    gcc-unwrapped
+    octaveFull
+    python3Full
+    nodejs
+    nixpkgs-fmt
 
+    # Docker and orchestration
+    ansible
+    docker-compose
+
+    # Maps
     josm
-    
+
     # Screen recording
     obs-studio
     peek
-    
+
     # Graphics
+    blender
     krita
     gmic_krita_qt
     potrace
-    
+    ffmpeg
+    inkscape
+    imagemagick
+
     # Audio
     audacity
+    pulseeffects-pw
     # lmms
     picard
     cmus
+    spotify
+    rhythmbox
+    unstable.helvum
 
-    # Plugins
-    # ladspaPlugins
-    # lsp-plugins
-    
+    vlc
+    syncplay
+
+    # DAW
+    zrythm
+    distrho
+    helvum
+    zam-plugins
+    x42-plugins
+    helm
+    zyn-fusion
+    lsp-plugins
+    ardour
+
     # Documents
     anki
     libreoffice
-    homebank
-    trilium
-    klavaro
     liberation_ttf
+    obsidian
+    keepassxc
+    glow
   ];
-}
 
+}
