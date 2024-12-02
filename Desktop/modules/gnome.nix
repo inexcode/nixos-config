@@ -15,16 +15,20 @@
     };
   };
 
+  services.gnome.gnome-remote-desktop.enable = true;
 
-  qt5.platformTheme = "gnome";
+  qt.platformTheme = "gnome";
 
   environment.systemPackages = with pkgs; [
-    gnome.pomodoro
-    gnome.gnome-tweaks
-    gnome.networkmanager-openvpn
+    gnome-pomodoro
+    gnome-tweaks
+    gnome-remote-desktop
+    networkmanager-openvpn
+    mission-center
     rhythmbox
     evolution
     gnomeExtensions.gsconnect
     paper-icon-theme
   ];
 }
+

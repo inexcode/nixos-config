@@ -4,7 +4,7 @@
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
     enable = true;
-    #interactiveShellInit = "ponysay -q";
+    # interactiveShellInit = "ponysay -q";
     autosuggestions = {
       enable = true;
     };
@@ -13,16 +13,15 @@
     };
     ohMyZsh = {
       enable = true;
-      plugins = [ 
-        "git" 
-        "python" 
-        "man" 
+      plugins = [
+        "git"
+        "python"
+        "man"
         "z"
         "catimg"
         "copyfile"
         "encode64"
         "extract"
-        "lol"
         "npm"
         "pip"
       ];

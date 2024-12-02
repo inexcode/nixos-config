@@ -1,53 +1,52 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inex-vscode, ... }:
 
-let
-  unstable = import <nixos-unstable> { config.allowUnfree = true; };
-in
 {
   environment.systemPackages = with pkgs; [
     # Utils
-    (pkgs.callPackage ./modules/my_vim.nix { })
     pciutils
     usbutils
     i2c-tools
+    lm_sensors
     bind
     nix-bundle
     file
-    glxinfo
-
+    restic
+    jq
+    sbctl
+    # Connectivity
     nmap
+    libcec
+    clinfo
+    #alfis
 
+
+    # File systems
     gparted
+    btrfs-progs
 
     # Archives
     unzip
     unrar
 
+    # Running things
     appimage-run
 
     # Manuals
-    unstable.manix
+    manix
     tldr
 
     # Terminal
-    cool-retro-term
     mosh
     tmux
     neofetch
     ponysay
-    bpytop
+    btop
     httpie
     htop
 
-    # Voice
-    speechd
-    rhvoice
-    unstable.noisetorch
-
-    xsane
-
     # Wireguard
-    wireguard-tools
+    #wireguard
+    #wireguard-tools
 
     nextcloud-client
 
@@ -58,40 +57,32 @@ in
     # Browsers
     firefox
     ungoogled-chromium
+    tor-browser-bundle-bin
 
     # Downloaders
-    transmission-gtk
-    yt-dlp
+    transmission_4-gtk
     syncthing
     wget
+    yt-dlp
 
     # Messangers
     tdesktop
     mumble
-    qtox
     dino
     gomuks
+    deltachat-desktop
 
-    # Games
-    steam
-    steam-run
-    unstable.openttd
-    minecraft
-    lutris
-    vulkan-tools
-    wineWowPackages.full
-    wineWowPackages.fonts
-    xonotic
-    cataclysm-dda
+    wineWowPackages.stable
+    winetricks
 
     # VCS
     git
     gitAndTools.git-bug
 
     # IDE
-    lens
-    postman
-    unstable.androidStudioPackages.canary
+    inex-vscode.packages.x86_64-linux.default
+    android-studio
+    arduino-ide
 
     # Compilers and interpretators
     ccls
@@ -101,58 +92,68 @@ in
     python3Full
     nodejs
     nixpkgs-fmt
+    pandoc
+    racket
+    dart
+
+    go
+    #hugo
 
     # Docker and orchestration
     ansible
     docker-compose
+
+    cookiecutter
 
     # Maps
     josm
 
     # Screen recording
     obs-studio
-    peek
+    kooha
 
     # Graphics
-    blender
     krita
-    gmic_krita_qt
     potrace
     ffmpeg
+    #blender-hip
     inkscape
-    imagemagick
+    kdenlive
+    libheif
 
     # Audio
     audacity
-    pulseeffects-pw
     # lmms
     picard
-    cmus
-    spotify
-    rhythmbox
-    unstable.helvum
+    easyeffects
+    mpv
 
-    vlc
-    syncplay
-
-    # DAW
-    zrythm
-    distrho
-    helvum
-    zam-plugins
-    x42-plugins
-    helm
-    zyn-fusion
-    lsp-plugins
-    ardour
+    steam-run
 
     # Documents
-    anki
     libreoffice
+    klavaro
     liberation_ttf
-    obsidian
     keepassxc
     glow
+    obsidian
+    aegisub
+    # texlive.combined.scheme-full
+
+    # Themes
+    paper-icon-theme
+    plata-theme
+
+    # iPhone passthru
+    usbmuxd
+    socat
+
+    zotero
+    virt-manager
+
+    immersed-vr
+
+    godot_4
   ];
 
 }

@@ -1,18 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inex-vscode, ... }:
 
-let
-  unstable = import <nixos-unstable> { config.allowUnfree = true; };
-  MyOBS = pkgs.wrapOBS.override { obs-studio = pkgs.obs-studio; } {
-  plugins = with pkgs.obs-studio-plugins; [
-    wlrobs
-    obs-gstreamer
-        obs-multi-rtmp
-  ];
-};
-in
 {
   environment.systemPackages = with pkgs; [
-    # Utils
+    # Utils    
     pciutils
     usbutils
     i2c-tools
@@ -26,7 +16,17 @@ in
     nmap
     libcec
     clinfo
-    alfis
+    #alfis
+
+    dfu-util
+    dfu-programmer
+    hackrf
+
+    #growisofs
+
+    rocmPackages.rocm-smi
+    rocmPackages.rocminfo
+
 
     # File systems
     gparted
@@ -40,7 +40,7 @@ in
     appimage-run
 
     # Manuals
-    unstable.manix
+    manix
     tldr
 
     # Terminal
@@ -49,13 +49,9 @@ in
     tmux
     neofetch
     ponysay
-    bpytop
+    btop
     httpie
     htop
-
-    # Voice
-    speechd
-    rhvoice
 
     # Wireguard
     #wireguard
@@ -70,10 +66,10 @@ in
     # Browsers
     firefox
     ungoogled-chromium
-    unstable.tor-browser-bundle-bin
+    tor-browser-bundle-bin
 
     # Downloaders
-    transmission-gtk
+    transmission_4-gtk
     syncthing
     wget
     yt-dlp
@@ -81,40 +77,36 @@ in
     # Messangers
     tdesktop
     mumble
-    qtox
+    #qtox
     dino
     gomuks
     deltachat-desktop
 
     # Games
-    steam
+    #steam
     steam-run-native
     openttd
-    minecraft
+    #minecraft
+    minetest
     vulkan-tools
     wineWowPackages.stable
     winetricks
     protontricks
     xonotic
-    cataclysm-dda
+    # cataclysm-dda
 
+    sidequest
     lutris
-    bottles
-
-    # VR
-    monado
-    openhmd
 
     # VCS
     git
     gitAndTools.git-bug
+    git-cliff
 
     # IDE
-
+    inex-vscode.packages.x86_64-linux.default
     (pkgs.callPackage ./modules/my_vim.nix { })
-    lens
-    postman
-    androidStudioPackages.canary
+    android-studio
 
     # Compilers and interpretators
     ccls
@@ -125,6 +117,11 @@ in
     nodejs
     nixpkgs-fmt
     pandoc
+    racket
+    dart
+    nil
+    go
+    hugo
 
     # Docker and orchestration
     ansible
@@ -137,58 +134,64 @@ in
 
     # Screen recording
     obs-studio
+    gpu-screen-recorder-gtk
     kooha
 
     # Graphics
     krita
-    gmic_krita_qt
     potrace
     ffmpeg
-    blender
-    unstable.shotwell
+    #blender-hip
+    shotwell
     inkscape
     kdenlive
+    davinci-resolve
+    libheif
+    digikam
 
     # Audio
     audacity
     # lmms
     picard
-    cmus
-    spotify
-    pulseeffects-pw
-
-    vlc
-    syncplay
+    # cmus
+    #spotify
+    easyeffects
+    #clementine
+    #vlc
+    # syncplay
     mpv
 
-    brasero
-    libsForQt5.k3b
+    #ylibsForQt5.k3b
 
     # DAW
-    zrythm
-    distrho
+    # zrythm
+    # distrho
     helvum
     zam-plugins
     x42-plugins
     helm
     zyn-fusion
-    lsp-plugins
+    #lsp-plugins
     ardour
     # Documents
-    anki
+    #anki
     libreoffice
-    homebank
     klavaro
     liberation_ttf
     keepassxc
     glow
-    unstable.obsidian
+    obsidian
     aegisub
+    texlive.combined.scheme-full
+    archi
 
-    # Themes
-    paper-icon-theme
-    plata-theme
+    # iPhone passthru
+    usbmuxd
+    socat
 
+    zotero
+
+    timewarrior
   ];
 
 }

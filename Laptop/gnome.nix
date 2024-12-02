@@ -6,7 +6,8 @@
     displayManager = {
       gdm = {
         enable = true;
-        wayland = false;
+        wayland = true;
+        autoSuspend = true;
       };
     };
     desktopManager = {
@@ -14,13 +15,14 @@
     };
   };
 
-
-  qt5.platformTheme = "gnome";
+  qt.platformTheme = "gnome";
 
   environment.systemPackages = with pkgs; [
-    gnome.pomodoro
-    gnome.gnome-tweaks
-    evolution
+    gnome-pomodoro
+    gnome-tweaks
+    gnome.gnome-remote-desktop
+    gnome.networkmanager-openvpn
+    rhythmbox
     gnomeExtensions.gsconnect
     paper-icon-theme
   ];

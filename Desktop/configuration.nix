@@ -15,6 +15,8 @@ in
       ./pipewire.nix
     ];
 
+  #chaotic.hdr.enable = true;
+
   # Video driver
   hardware = {
     pulseaudio = {
